@@ -6,12 +6,11 @@ using System.Threading.Tasks;
 
 namespace HotelProject.WebUI.Controllers
 {
-    public class DefaultController : Controller
+    public class RoomController : Controller
     {
         public IActionResult Index()
         {
             return View();
-           
         }
     }
 }

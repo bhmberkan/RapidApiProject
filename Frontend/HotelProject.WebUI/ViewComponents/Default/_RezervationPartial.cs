@@ -4,14 +4,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace HotelProject.WebUI.Controllers
+namespace HotelProject.WebUI.ViewComponents.Default
 {
-    public class DefaultController : Controller
+    public class _RezervationPartial : ViewComponent
     {
-        public IActionResult Index()
+        public IViewComponentResult Invoke()
         {
             return View();
-           
         }
     }
 }
