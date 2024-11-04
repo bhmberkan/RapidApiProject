@@ -1,0 +1,55 @@
+﻿@model List<ResultBookingDto>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/AdminLayout/_AdminLayout.cshtml";
+    int count = 0;
+}
+
+
+
+
+        <div class="card-body">
+            <div class="card-title">
+                <h4>Rezervasyonlar</h4>
+            </div>
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Misafir</th>
+                            <th>Giriş Tarihi</th>
+                            <th>Çıkış Tarihi</th>
+                            <th>Durum</th>
+                            <th>Onayla</th>
+                            <th>İptal Et</th>
+                            <th>Beklet</th>
+                            <th>Güncelle</th>
+                            <th>Detaylar</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var x in Model)
+                        {
+                            count++;
+                            <tr>
+                                <th>@count</th> 
+                                <td>@x.Name</td>
+                                <td>@(((DateTime)x.Chackin).ToString("dd-MMM-yyyy"))</td>
+                                <td>@(((DateTime)x.ChackOut).ToString("dd-MMM-yyyy"))</td>
+                                <td>
+                                    <span class="badge badge-primary px-2">@x.Status</span>
+                                </td>
+                               <td> <a href="/BookingAdmin/ApprovedRezervation/@x.BookingID" class="btn btn-outline-primary">Onayla</a></td>
+                               <td> <a href="#" class="btn btn-outline-danger">İptal et</a></td>
+                               <td> <a href="#" class="btn btn-outline-warning">Beklet </a></td>
+                               <td> <a href="#" class="btn btn-outline-info">Güncelle </a></td>
+                               <td> <a href="#" class="btn btn-outline-dark">Detaylar </a></td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+ 

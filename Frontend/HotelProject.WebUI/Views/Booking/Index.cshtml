@@ -3,6 +3,8 @@
     Layout = null;
 }
 
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -15,33 +17,21 @@
         <!-- Spinner End -->
         <!-- Header Start -->
         @await Component.InvokeAsync("_NavbarPartial")
+
         <!-- Header End -->
         <!-- Carousel Start -->
-        @await Component.InvokeAsync("_SliderPartial")
+        @await Component.InvokeAsync("_BookingCoverPartial")
         <!-- Carousel End -->
         <!-- Booking Start -->
+
+
+
         @await Component.InvokeAsync("_RezervationPartial")
-        <!-- Booking End -->
-        <!-- About Start -->
-        @await Component.InvokeAsync("_AboutUsPartial")
-        <!-- About End -->
-        <!-- Room Start -->
-        @await Component.InvokeAsync("_OurRoomsPartial")
-        <!-- Room End -->
-        <!-- Video Start -->
-        @await Component.InvokeAsync("_TrailerPartial")
-        <!-- Video Start -->
-        <!-- Service Start -->
-        @await Component.InvokeAsync("_ServicePartial")
-        <!-- Service End -->
-        <!-- Testimonial Start -->
-        @await Component.InvokeAsync("_TestimonialPartial")
-        <!-- Testimonial End -->
-        <!-- Team Start -->
-        @await Component.InvokeAsync("_TeamPartial")
-        <!-- Team End -->
-        <!-- Newsletter Start -->
-        @await Html.PartialAsync("_SubscribePartial")
+
+        @await Html.PartialAsync("/Views/Booking/AddBooking.cshtml")
+
+        @await Html.PartialAsync("/Views/Default/_SubscribePartial.cshtml")
+
         <!-- Newsletter Start -->
         <!-- Footer Start -->
         @await Component.InvokeAsync("_FooterPartial")
