@@ -19,8 +19,8 @@ namespace WebApiJwt.Controllers
         {
             return Ok(new CreateToken().TokenCreate());
         }
-
-        [Authorize]
+        
+        [Authorize(AuthenticationSchemes = "Bearer")]
         [HttpGet("[action]")]
         public IActionResult Test2()
         {
