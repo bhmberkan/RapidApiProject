@@ -46,7 +46,7 @@ namespace HotelProject.WebUI.Controllers
             return View();
 
             // burdaki onaylama kısmına müfredatın en sonunda değineceğiz
-            // ders 66 da kaldım
+           
         }
 
     }

@@ -1,0 +1,30 @@
+﻿@model List<ApiMoveViewModel>
+@{
+    Layout = null;
+}
+
+
+<link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+<div class="container">
+    <br /> <br />
+    <table class="table table-bordered">
+        <tr>
+            <th>#</th>
+            <th>Film adı</th>
+            <th>Puanı</th>
+            <th>Imdb Link</th>
+
+        </tr>
+        @foreach (var x in Model)
+        {
+            <tr>
+                <td>@x.rank</td>
+                <td>@x.title</td>
+                <td>@x.rating</td>
+                
+            <td> <a href="@x.imdb_link" class="btn btn-dark" target="_blank">Imdb'ye Git</a> </td>
+        </tr>
+    }
+    </table>
+</div>

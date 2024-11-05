@@ -1,0 +1,42 @@
+﻿@model List<BookingApiViewModel.Result>
+@{
+    Layout = null;
+    int count = 0;
+}
+
+
+
+
+<link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+@if (Model != null && Model.Any())
+{
+    <div class="container">
+        <br /> <br />
+        <table class="table table-bordered">
+            <tr>
+                <th>#</th>
+                <th>Otel Adı</th>
+                <th>Otel Puanı</th>
+                <th>Otel Detaylar</th>
+            </tr>
+
+
+            @foreach (var x in Model)
+            {
+                count++;
+                <tr>
+                    <th>@count</th>  @*Id numarası apide yoktu bizde direkt count oluşturup onu bir bir arttırıp yazdırıyoruz*@
+                    <td>@x.name</td>
+                    <td>@x.reviewScore</td>
+                    <td><a href="" class="btn btn-dark">Detaylar</a></td>
+                </tr>
+            }
+
+
+        </table>
+    </div>
+}
+else
+{
+    <tr> veri bulunamadı</tr>
+}

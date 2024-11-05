@@ -1,0 +1,34 @@
+﻿@model List<ExchangeViewModel.Exchange_Rates>
+@{
+    Layout = null;
+}
+
+
+
+<link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+<div class="container">
+    <br /> <br />
+           <table class="table table-bordered">
+               <tr>
+                   <th>Döviz Kodu</th>
+                   <th>Birim Fiyat</th>
+               </tr>
+               @if (Model != null && Model.Any())
+               {
+
+                   @foreach (var x in Model)
+                   {
+                       <tr>
+                           <td>@x.currency</td>
+                           <td>@x.exchange_rate_buy</td>
+                       </tr>
+                   }
+               }
+               else
+            {
+                <tr> veri bulunamadı</tr>
+            }
+
+           </table>
+</div>
