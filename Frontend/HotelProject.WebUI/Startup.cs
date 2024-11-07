@@ -9,6 +9,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using FluentValidation.AspNetCore;
+using FluentValidation;
+using HotelProject.WebUI.Dtos.GuestDto;
+using HotelProject.WebUI.ValidationRules.GuestValidationRules;
 
 namespace HotelProject.WebUI
 {
@@ -28,7 +32,11 @@ namespace HotelProject.WebUI
             services.AddIdentity<AppUser, AppRole>().AddEntityFrameworkStores<Context>();
 
             services.AddHttpClient();
-            services.AddControllersWithViews();
+            // bu kýsmý eklemeyi unutmuþtuk ondan dolayý çalýþmýyordu 
+            services.AddTransient<IValidator<CreateGuestDto>, CreateGuestValidator>();
+            services.AddTransient<IValidator<UpdateGuestDto>, UpdateGuestValidator>();
+            // aradaki
+            services.AddControllersWithViews().AddFluentValidation();
             services.AddAutoMapper(typeof(Startup));
         }
 

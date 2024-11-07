@@ -98,5 +98,3 @@ namespace HotelProject.WebUI.Controllers
     }
 }
 
-
-//ders 96 da kaldım guest işlemleri

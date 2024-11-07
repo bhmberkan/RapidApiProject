@@ -44,7 +44,6 @@ namespace HotelProject.WebUI.Controllers
 
             return RedirectToAction("Index", "Default");
 
-
         }
     }
 }
