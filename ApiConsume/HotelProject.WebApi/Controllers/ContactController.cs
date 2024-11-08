@@ -13,7 +13,7 @@ namespace HotelProject.WebApi.Controllers
     [ApiController]
     public class ContactController : ControllerBase
     {
-        private readonly IContactService  _contactService;
+        private readonly IContactService _contactService;
 
         public ContactController(IContactService contactService)
         {
@@ -33,6 +33,13 @@ namespace HotelProject.WebApi.Controllers
         public IActionResult InboxListContact()
         {
             var values = _contactService.TGetList();
+            return Ok(values);
+        }
+
+        [HttpGet("{id}")]
+        public IActionResult GetSendMessage(int id)
+        {
+            var values = _contactService.TGetByID(id);
             return Ok(values);
         }
 

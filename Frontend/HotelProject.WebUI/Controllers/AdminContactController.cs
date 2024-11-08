@@ -1,6 +1,8 @@
-﻿using HotelProject.WebUI.Dtos.ContactDto;
+﻿using HotelProject.WebUI.Models.Mail;
+using HotelProject.WebUI.Dtos.ContactDto;
 using HotelProject.WebUI.Dtos.SendMessageDto;
 using Microsoft.AspNetCore.Mvc;
+using MimeKit;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -8,6 +10,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using MailKit.Net.Smtp;
 
 namespace HotelProject.WebUI.Controllers
 {
@@ -54,23 +57,50 @@ namespace HotelProject.WebUI.Controllers
             return View();
         }
 
+      
+
         [HttpPost]
 
         public async Task<IActionResult> AddSendMessage(CreateSendMessageDto createSendMessageDto)
         {
+            MimeMessage mimeMessage = new MimeMessage();
+
+            MailboxAddress mailboxAddress = new MailboxAddress("HotelierAdmin", "berkanburakturgut@gmail.com");
+            mimeMessage.From.Add(mailboxAddress); // mesaj kimden 
+
+            MailboxAddress mailboxAddressTo = new MailboxAddress("User", createSendMessageDto.ReciverMail);
+            mimeMessage.To.Add(mailboxAddressTo); // mesaj kime 
+
+            var bodyBuilder = new BodyBuilder();
+            bodyBuilder.TextBody = createSendMessageDto.Title; // mesajın içerik ne 
+            mimeMessage.Body = bodyBuilder.ToMessageBody();
+
+            mimeMessage.Subject = createSendMessageDto.Content;
+
+            SmtpClient client = new SmtpClient();
+            client.Connect("smtp.gmail.com", 587, false); // 587 port numarası , ssl gereksin mi = fasle istersen true yaparsın
+            client.Authenticate("berkanburakturgut@gmail.com", "fwsdhhdhrzzhgqmq");
+            client.Send(mimeMessage);
+            client.Disconnect(true);
+
+
             createSendMessageDto.SenderMail = "admin@gmail.com";
             createSendMessageDto.SenderName = "admin";
             createSendMessageDto.Date = DateTime.Parse(DateTime.Now.ToShortDateString());
-          
-            var client = _httpClientFactory.CreateClient();
+
+            var client2 = _httpClientFactory.CreateClient();
             var jstondata = JsonConvert.SerializeObject(createSendMessageDto);
             StringContent StringContent = new StringContent(jstondata, Encoding.UTF8, "application/json");
-            var responseMessage = await client.PostAsync("http://localhost:26382/api/SendMessage", StringContent);
+            var responseMessage = await client2.PostAsync("http://localhost:26382/api/SendMessage", StringContent);
             if (responseMessage.IsSuccessStatusCode)
             {
                 return RedirectToAction("SendBox");
             }
             return View();
+
+
+            
+
         }
 
 
@@ -85,12 +115,34 @@ namespace HotelProject.WebUI.Controllers
             return PartialView();
         }
 
-        public IActionResult MessageDetails(int id)
+        [HttpGet]
+        public async Task<IActionResult> MessageDetailsSendBox(int id)
         {
-            id = 0;
+            var client = _httpClientFactory.CreateClient();
+            var ResponseMessage = await client.GetAsync($"http://localhost:26382/api/SendMessage/{id}");
+            if (ResponseMessage.IsSuccessStatusCode)
+            {
+                var jsondata = await ResponseMessage.Content.ReadAsStringAsync();
+                var values = JsonConvert.DeserializeObject<GetMessageByIDDto>(jsondata);
+                return View(values);
+            }
             return View();
 
-            // Ders 111 de kaldım. Gelen mesaj detayları
+        }
+
+
+        [HttpGet]
+        public async Task<IActionResult> MessageDetailsByInbox(int id)
+        {
+            var client = _httpClientFactory.CreateClient();
+            var ResponseMessage = await client.GetAsync($"http://localhost:26382/api/Contact/{id}");
+            if (ResponseMessage.IsSuccessStatusCode)
+            {
+                var jsondata = await ResponseMessage.Content.ReadAsStringAsync();
+                var values = JsonConvert.DeserializeObject<InboxContactDto>(jsondata);
+                return View(values);
+            }
+            return View();
 
         }
     }
