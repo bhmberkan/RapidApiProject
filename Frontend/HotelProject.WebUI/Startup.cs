@@ -13,6 +13,8 @@ using FluentValidation.AspNetCore;
 using FluentValidation;
 using HotelProject.WebUI.Dtos.GuestDto;
 using HotelProject.WebUI.ValidationRules.GuestValidationRules;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc.Authorization;
 
 namespace HotelProject.WebUI
 {
@@ -38,6 +40,24 @@ namespace HotelProject.WebUI
             // aradaki
             services.AddControllersWithViews().AddFluentValidation();
             services.AddAutoMapper(typeof(Startup));
+            services.AddMvc(config =>
+            {
+                var policy = new AuthorizationPolicyBuilder()
+                .RequireAuthenticatedUser()
+                .Build();
+
+                config.Filters.Add(new AuthorizeFilter(policy));
+                // proje seyiyesinde autohorize iþlemleri yapmak için yazdýk
+            });
+            // login path vericez þimdi de 
+            services.ConfigureApplicationCookie(options =>
+            {
+                options.Cookie.HttpOnly = true; // http ye izin ver
+                options.ExpireTimeSpan = TimeSpan.FromMinutes(30); // 30 dk giriþ yapmazsa logine at 
+                options.LoginPath = "/Login/Index/"; // yolu düzelttik artýk acount login deðil de indexe gidicek
+
+            
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -51,8 +71,10 @@ namespace HotelProject.WebUI
             {
                 app.UseExceptionHandler("/Home/Error");
             }
+            app.UseStatusCodePagesWithReExecute("/ErrorPage/Eror404","?code=(0)"); // 404 sayfasý için
+            app.UseHttpsRedirection();
             app.UseStaticFiles();
-
+            app.UseAuthentication(); // proje seyiyesinde autohorize iþlemleri yapmak için yazdýk
             app.UseRouting();
 
             app.UseAuthorization();

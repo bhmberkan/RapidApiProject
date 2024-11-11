@@ -39,7 +39,7 @@ namespace HotelProject.WebUI.Controllers
 
             return View();
 
-            //ders 122 de kaldım. Authorize konusu
+        
         }
     }
 }

@@ -9,6 +9,7 @@ namespace HotelProject.DataAccessLayer.Abstract
 {
     public interface IContactDal : IGenericDal<Contact>
     {
+        public int GetContactCount(); // geriye değer döndürmesi için int formatıdna tanımladık voidden 
 
     }
 }
