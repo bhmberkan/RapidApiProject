@@ -27,5 +27,7 @@ namespace HotelProject.WebUI.Dtos.RegisterDto
         [Compare("Password",ErrorMessage ="Şifreler uyuşmuyor.")]
         public string ConfimPassword { get; set; }
 
+       // public int WorkLocationID { get; set; } // bu eksik olursa kullanıcı ekleyemeyiz çünkü ilişkili tabloda bu eklediğimiz kayda göre ıd ataması lazım
+       // ıd ye 1 dedik direkt appuserdeki o yüzden buraya bu tanımı geçmedim
     }
 }

@@ -1,0 +1,42 @@
+﻿@model List<HotelProject.WebUI.Dtos.AppUserDto.ResultAppUserListDto>
+@{
+    ViewData["Title"] = "UserList";
+    Layout = "~/Views/AdminLayout/_AdminLayout.cshtml";
+}
+
+
+
+
+
+<table class="table table-xs mb-0">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Adı Soyadı</th>
+            <th>Şehir Bilgisi</th>
+            <th>Durum</th>
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var x in Model)
+        {
+            <tr>
+
+                <td><img src="@x.ImageUrl" class=" rounded-circle mr-3" alt="" style="width:50px; height:50px;"></td>
+                <td>@(x.Name?? "name boş") @(x.Surname?? "surname boş")</td>
+                <td>@(x.City?? "Şehir boş" )</td>
+
+
+                <td><i class="fa fa-circle-o text-success  mr-2"></i> Aktif</td>
+
+            </tr>
+        }
+
+    </tbody>
+</table>
+<br />
+
+
+@*burada kaldım  yukarıdaki butonu yapcaz
+ders 146 da kaldım.*@

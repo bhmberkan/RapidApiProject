@@ -10,7 +10,7 @@
     <div class="card">
         <div class="card-body">
             <div class="email-left-box">
-                <a href="email-compose.html" class="btn btn-primary btn-block">Yeni MesaJ Oluştur</a>
+                <a href="/AdminContact/AddSendMessage" class="btn btn-primary btn-block">Yeni MesaJ Oluştur</a>
                 @await Html.PartialAsync("SideBarAdminContactPartial")
                 <h5 class="mt-5 m-b-10">Kategoriler</h5>
                 @await Html.PartialAsync("SideBarAdminContactCategoryPartial")
@@ -84,7 +84,7 @@
 
                         <div class="text-left m-t-15">
                             <button class="btn btn-primary m-b-30 m-t-15 f-s-14 p-l-20 p-r-20 m-r-10" ><i class="fa fa-paper-plane m-r-5"></i> Gönder</button>
-                            <button class="btn btn-dark m-b-30 m-t-15 f-s-14 p-l-20 p-r-20" type="button"><i class="ti-close m-r-5 f-s-12"></i> Vazgeç</button>
+                            <button class="btn btn-dark m-b-30 m-t-15 f-s-14 p-l-20 p-r-20" type="button"  ><i class="ti-close m-r-5 f-s-12"></i>&nbsp; <a href="/AdminContact/Inbox">Vazgeç</a> </button>
                         </div>
                     </form>
                 </div>

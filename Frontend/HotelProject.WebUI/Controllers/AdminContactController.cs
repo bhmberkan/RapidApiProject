@@ -23,43 +23,57 @@ namespace HotelProject.WebUI.Controllers
             _httpClientFactory = httpClientFactory;
         }
 
-        public async Task<IActionResult> Inbox()
+        public async Task Gelengidensay()
         {
-            var client = _httpClientFactory.CreateClient();
-            var responseMessage = await client.GetAsync("http://localhost:26382/api/Contact");
 
             var client2 = _httpClientFactory.CreateClient();
             var responseMessage2 = await client2.GetAsync("http://localhost:26382/api/Contact/GetContactCount");
 
             var client3 = _httpClientFactory.CreateClient();
             var responseMessage3 = await client3.GetAsync("http://localhost:26382/api/SendMessage/GetSendMessageCount");
+            var jsondata2 = await responseMessage2.Content.ReadAsStringAsync();
+            var jsondata3 = await responseMessage3.Content.ReadAsStringAsync();
+            ViewBag.ContactCount = jsondata2;
+            ViewBag.SendMessageCount = jsondata3;
+        }
+
+        public async Task<IActionResult> Inbox()
+        {
+            var client = _httpClientFactory.CreateClient();
+            var responseMessage = await client.GetAsync("http://localhost:26382/api/Contact");
+
+            await Gelengidensay();
 
             if (responseMessage.IsSuccessStatusCode)
             {
                 var jsondata = await responseMessage.Content.ReadAsStringAsync();
-                var jsondata2 = await responseMessage2.Content.ReadAsStringAsync();
-                var jsondata3 = await responseMessage3.Content.ReadAsStringAsync();
+
                 var values = JsonConvert.DeserializeObject<List<InboxContactDto>>(jsondata);
-                ViewBag.ContactCount = jsondata2;
-                ViewBag.SendMessageCount = jsondata3;
+
                 return View(values);
             }
 
 
             return View();
 
-           
-           
+
+
         }
 
         public async Task<IActionResult> Sendbox()
         {
             var client = _httpClientFactory.CreateClient();
             var responseMessage = await client.GetAsync("http://localhost:26382/api/SendMessage");
+
+            await Gelengidensay(); // fonksiyon olarak kullandım çalıştı
+
+
             if (responseMessage.IsSuccessStatusCode)
             {
                 var jsondata = await responseMessage.Content.ReadAsStringAsync();
+
                 var values = JsonConvert.DeserializeObject<List<ResulStendBoxDto>>(jsondata);
+
                 return View(values);
             }
             return View();
@@ -67,18 +81,19 @@ namespace HotelProject.WebUI.Controllers
 
 
         [HttpGet]
-        public IActionResult AddSendMessage()
+        public async Task<IActionResult> AddSendMessage()
         {
-
+            await Gelengidensay();
             return View();
         }
 
-      
+
 
         [HttpPost]
 
         public async Task<IActionResult> AddSendMessage(CreateSendMessageDto createSendMessageDto)
         {
+
             MimeMessage mimeMessage = new MimeMessage();
 
             MailboxAddress mailboxAddress = new MailboxAddress("HotelierAdmin", "berkanburakturgut@gmail.com");
@@ -104,8 +119,11 @@ namespace HotelProject.WebUI.Controllers
             createSendMessageDto.SenderName = "admin";
             createSendMessageDto.Date = DateTime.Parse(DateTime.Now.ToShortDateString());
 
+
+
             var client2 = _httpClientFactory.CreateClient();
             var jstondata = JsonConvert.SerializeObject(createSendMessageDto);
+
             StringContent StringContent = new StringContent(jstondata, Encoding.UTF8, "application/json");
             var responseMessage = await client2.PostAsync("http://localhost:26382/api/SendMessage", StringContent);
             if (responseMessage.IsSuccessStatusCode)
@@ -115,7 +133,7 @@ namespace HotelProject.WebUI.Controllers
             return View();
 
 
-            
+
 
         }
 
@@ -134,6 +152,7 @@ namespace HotelProject.WebUI.Controllers
         [HttpGet]
         public async Task<IActionResult> MessageDetailsSendBox(int id)
         {
+            await Gelengidensay();
             var client = _httpClientFactory.CreateClient();
             var ResponseMessage = await client.GetAsync($"http://localhost:26382/api/SendMessage/{id}");
             if (ResponseMessage.IsSuccessStatusCode)
@@ -150,6 +169,7 @@ namespace HotelProject.WebUI.Controllers
         [HttpGet]
         public async Task<IActionResult> MessageDetailsByInbox(int id)
         {
+            await Gelengidensay();
             var client = _httpClientFactory.CreateClient();
             var ResponseMessage = await client.GetAsync($"http://localhost:26382/api/Contact/{id}");
             if (ResponseMessage.IsSuccessStatusCode)
@@ -163,6 +183,6 @@ namespace HotelProject.WebUI.Controllers
         }
 
 
-    
+
     }
 }

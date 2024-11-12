@@ -4,14 +4,16 @@ using HotelProject.DataAccessLayer.Concrete;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace HotelProject.DataAccessLayer.Migrations
 {
     [DbContext(typeof(Context))]
-    partial class ContextModelSnapshot : ModelSnapshot
+    [Migration("20241112112344_mid_add_ImageUrl")]
+    partial class mid_add_ImageUrl
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -144,12 +146,6 @@ namespace HotelProject.DataAccessLayer.Migrations
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
 
-                    b.Property<string>("WorkDepartment")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("WorkLocationID")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
                     b.HasIndex("NormalizedEmail")
@@ -159,8 +155,6 @@ namespace HotelProject.DataAccessLayer.Migrations
                         .IsUnique()
                         .HasDatabaseName("UserNameIndex")
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
-
-                    b.HasIndex("WorkLocationID");
 
                     b.ToTable("AspNetUsers");
                 });
@@ -365,24 +359,6 @@ namespace HotelProject.DataAccessLayer.Migrations
                     b.ToTable("Services");
                 });
 
-            modelBuilder.Entity("HotelProject.EntityLayer.Concrete.WorkLocation", b =>
-                {
-                    b.Property<int>("WorkLocationID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("WorkLocationCity")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("WorkLocationName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("WorkLocationID");
-
-                    b.ToTable("workLocations");
-                });
-
             modelBuilder.Entity("HotelProject.EntityLayer.Staff", b =>
                 {
                     b.Property<int>("StaffID")
@@ -550,17 +526,6 @@ namespace HotelProject.DataAccessLayer.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("HotelProject.EntityLayer.Concrete.AppUser", b =>
-                {
-                    b.HasOne("HotelProject.EntityLayer.Concrete.WorkLocation", "workLocation")
-                        .WithMany("appUsers")
-                        .HasForeignKey("WorkLocationID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("workLocation");
-                });
-
             modelBuilder.Entity("HotelProject.EntityLayer.Concrete.Contact", b =>
                 {
                     b.HasOne("HotelProject.EntityLayer.Concrete.MessageCategory", "MessageCategory")
@@ -626,11 +591,6 @@ namespace HotelProject.DataAccessLayer.Migrations
             modelBuilder.Entity("HotelProject.EntityLayer.Concrete.MessageCategory", b =>
                 {
                     b.Navigation("contacts");
-                });
-
-            modelBuilder.Entity("HotelProject.EntityLayer.Concrete.WorkLocation", b =>
-                {
-                    b.Navigation("appUsers");
                 });
 #pragma warning restore 612, 618
         }
