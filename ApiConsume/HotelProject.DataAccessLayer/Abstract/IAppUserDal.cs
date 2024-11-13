@@ -10,5 +10,8 @@ namespace HotelProject.DataAccessLayer.Abstract
     public interface IAppUserDal: IGenericDal<AppUser>
     {
         List<AppUser> UserListWithLocation(); // kullanıcı listesini locasyonlara göre alacağız bundan dolayı tanımladık
+        List<AppUser> UserListWithLocations();
+
+        int AppUserCount();
     }
 }

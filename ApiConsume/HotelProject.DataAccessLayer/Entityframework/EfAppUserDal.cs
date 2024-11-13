@@ -18,10 +18,24 @@ namespace HotelProject.DataAccessLayer.Entityframework
 
         }
 
+        public int AppUserCount()
+        {
+            var context = new Context();
+            var value = context.Users.Count();
+            return value;
+        }
+
         public List<AppUser> UserListWithLocation()
         {
             var context = new Context();
             return context.Users.Include(x => x.workLocation).ToList();
+        }
+
+        public List<AppUser> UserListWithLocations()
+        {
+            var context = new Context();
+            var values = context.Users.Include(x => x.workLocation).ToList();
+            return values;
         }
     }
 }

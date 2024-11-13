@@ -1,0 +1,54 @@
+﻿@model List<HotelProject.WebUI.Dtos.BookingDto.ResultLast6BookingsDto>
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="active-member">
+                    <div class="table-responsive">
+                        <table class="table table-xs mb-0">
+                            <thead>
+                                <tr>
+                                    <th>Customers</th>
+                                    <th>Product</th>
+                                    <th>Country</th>
+                                    <th>Status</th>
+                                    <th>Payment Method</th>
+                                    <th>Activity</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var x in Model)
+                                {
+                                    <tr>
+                                        <td>@x.Name</td>
+                                        <td>Şehir</td>
+                                        <td>
+                                            <span>Ülke</span>
+                                        </td>
+                                        <td>
+                                            <div>
+                                                <div class="progress" style="height: 6px">
+                                                    <div class="progress-bar bg-success" style="width: 50%"></div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td><i class="fa fa-circle-o text-success  mr-2"></i> Paid</td>
+                                        <td>
+                                            <span>Last Login</span>
+                                            <span class="m-0 pl-3">10 sec ago</span>
+                                        </td>
+                                    </tr>
+                                }
+
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@*ders 164'te kaldım*@

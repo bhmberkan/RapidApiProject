@@ -35,9 +35,19 @@ namespace HotelProject.BusinessLayer.Concerte
             return _ıstaffDal.GetList();
         }
 
+        public int TGetStaffCount()
+        {
+            return _ıstaffDal.GetStaffCount();
+        }
+
         public void TInsert(Staff t)
         {
             _ıstaffDal.Insert(t);
+        }
+
+        public List<Staff> TLast4Staff()
+        {
+            return _ıstaffDal.Last4Staff();
         }
 
         public void TUpdate(Staff t)

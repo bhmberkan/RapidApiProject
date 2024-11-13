@@ -1,0 +1,77 @@
+﻿@model List<HotelProject.WebUI.Dtos.AppUserDto.ResultAppUserWithLocationDto>
+@{
+    ViewData["Title"] = "UserList";
+    Layout = "~/Views/AdminLayout/_AdminLayout.cshtml";
+}
+
+
+<div class="col-lg-12">
+    <div class="card">
+        <div class="card-body">
+            <div class="active-member">
+                <div class="table-responsive">
+                    <table class="table table-xs mb-0">
+                        <thead>
+                            <tr>
+                                <th>Kullanıcı</th>
+                                <th>Çalıştığı Şube</th>
+                                <th>Şehir</th>
+                                <th>Ülke</th>
+                                <th>Durum</th>
+                                <th>Cinsiyet</th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var x in Model)
+                            {
+
+                                <tr>
+                                    <td><img src="@x.ImageUrl" class=" rounded-circle mr-3" alt="">@x.Name @x.Surname</td>
+                                    <td>@x.WorkLocationName</td>
+                                    <td>@x.City</td>
+                                    <td>
+                                        <span> @x.Country</span>
+                                    </td>
+                                    @if (x.Gender == "Erkek")
+                                    {
+                                        <td>
+                                            <div>
+                                                <div class="progress" style="height: 6px">
+                                                    <div class="progress-bar bg-success" style="width: 63%"></div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    }
+                                    @if (x.Gender == "Kadın")
+                                    {
+                                        <td>
+                                            <div>
+                                                <div class="progress" style="height: 6px">
+                                                    <div class="progress-bar bg-warning" style="width: 75%"></div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    }
+
+
+                                    @if (x.Gender == "Erkek")
+                                    {
+                                        <td><i class="fa fa-circle-o text-success  mr-2"></i> Erkek</td>
+                                    }
+                                    @if (x.Gender == "Kadın")
+                                    {
+                                        <td><i class="fa fa-circle-o text-warning  mr-2"></i> Kadın</td>
+                                    }
+
+                                </tr>
+                            }
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<a href="/Restiger/Index/" class="btn btn-primary">Yeni Kullanıcı Kaydı</a>
