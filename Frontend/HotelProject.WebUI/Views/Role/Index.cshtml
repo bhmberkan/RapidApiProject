@@ -1,0 +1,32 @@
+﻿@model List<HotelProject.EntityLayer.Concrete.AppRole>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/AdminLayout/_AdminLayout.cshtml";
+}
+
+<h1>Rol Listesi</h1>
+
+
+<table class="table table-bordered">
+    <tr>
+        <td>#</td>
+        <td>Rol Adı</td>
+        <td>Sil</td>
+        <td>Güncelle</td>
+    </tr>
+    @foreach (var x in Model)
+    {
+        <tr>
+            <td>@x.Id</td>
+            <td>@x.Name</td>
+            
+            <td><a href="/Role/DeleteRole/@x.Id" class="btn mb-1 btn-rounded btn-outline-danger">Sil</a></td>
+            <td><a href="/Role/UpdateRole/@x.Id" class="btn mb-1 btn-rounded btn-outline-success">Güncelle</a></td>
+        </tr>
+    }
+</table>
+
+<a href="/Role/AddRole" class="btn mb-1 btn-outline-info">Yeni Rol Girişi</a>
+
+
+// 178 rol atamalarında kaldım

@@ -1,0 +1,96 @@
+﻿@*@model HotelProject.WebUI.Dtos.DashboardDto.ResulInstagramFallowersDto*@
+
+<div class="row">
+    <div class="col-lg-3 col-sm-6">
+        <div class="card">
+            <div class="social-graph-wrapper widget-facebook">
+                <span class="s-icon"><i class="fa fa-facebook"></i></span>
+                <p><a href="https://www.facebook.com/bhmberkan?locale=tr_TR" style="color:white;">bhmberkan</a></p>
+            </div>
+            <div class="row">
+                <div class="col-6 border-right">
+                    <div class="pt-3 pb-3 pl-0 pr-0 text-center">
+                        <h4 class="m-1">89</h4>
+                        <p class="m-0">Arkadaşlar</p>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="pt-3 pb-3 pl-0 pr-0 text-center">
+                        <h4 class="m-1">517</h4>
+                        <p class="m-0">Takipçiler</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-3 col-sm-6">
+        <div class="card">
+            <div class="social-graph-wrapper widget-linkedin">
+                <span class="s-icon"><i class="fa fa-linkedin"></i></span>
+                <p><a href="https://www.linkedin.com/in/berkan-turgut-2a277a232/" style="color:white;">Berkan-Turgut</a></p>
+            </div>
+            <div class="row">
+                <div class="col-6 border-right">
+                    <div class="pt-3 pb-3 pl-0 pr-0 text-center">
+                        <p class="m-0">Şehir</p>
+                        <h4 class="m-1">@ViewBag.city</h4>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="pt-3 pb-3 pl-0 pr-0 text-center">
+                        <p class="m-0">İl</p>
+                        <h4 class="m-1">@ViewBag.country</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    @*@foreach (var x in Model)*@ @*gerek kalmadı tek veri alıyoruz direkt modelden kullanıcaz*@
+    
+        <div class="col-lg-3 col-sm-6">
+            <div class="card">
+                <div class="social-graph-wrapper widget-googleplus">
+                    <span class="s-icon"><i class="fa fa-instagram"></i></span> 
+                    <p ><a href="https://www.instagram.com/bhmberkan/" style="color:white;" target="_blank">@ViewBag.username</a> </p>
+                </div>
+                <div class="row">
+                    <div class="col-6 border-right">
+                        <div class="pt-3 pb-3 pl-0 pr-0 text-center">
+                            <h4 class="m-1">@ViewBag.followers</h4>
+                            <p class="m-0">Takipçiler</p>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="pt-3 pb-3 pl-0 pr-0 text-center">
+                            <h4 class="m-1">@ViewBag.following</h4>
+                            <p class="m-0">Takip Ettiklerin</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+
+    <div class="col-lg-3 col-sm-6">
+        <div class="card">
+            <div class="social-graph-wrapper widget-twitter">
+                <span class="s-icon"><i class="fa fa-twitter"></i></span>
+                <p><a href="https://x.com/bhmberkan"  style="color:white;"  target="_blank">@ViewBag.twUsarname</a></p>
+            </div>
+            <div class="row">
+                <div class="col-6 border-right">
+                    <div class="pt-3 pb-3 pl-0 pr-0 text-center">
+                        <h4 class="m-1">@ViewBag.twfallowers</h4>
+                        <p class="m-0">Takipçi Sayısı</p>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="pt-3 pb-3 pl-0 pr-0 text-center">
+                        <h4 class="m-1">@ViewBag.twfallowing</h4>
+                        <p class="m-0">Takip ettiklerim</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
