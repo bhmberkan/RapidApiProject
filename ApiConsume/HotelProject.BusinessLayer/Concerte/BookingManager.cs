@@ -19,14 +19,24 @@ namespace HotelProject.BusinessLayer.Concerte
             _bookingDal = bookingDal;
         }
 
-        public void BookingStatusChangeApproved(Booking booking)
+        public void TBookingStatusChangeApprovedCancel(int id)
+        {
+            _bookingDal.BookingStatusChangeApprovedCancel(id);
+        }
+
+        public void TBookingStatusChangeApproved(Booking booking)
         {
             _bookingDal.BookingStatusChangeApproved(booking);
         }
 
-        public void BookingStatusChangeApproved2(int id)
+        public void TBookingStatusChangeApproved2(int id)
         {
             _bookingDal.BookingStatusChangeApproved2(id);
+        }
+
+        public void TBookingStatusChangeApproved3(int id)
+        {
+            _bookingDal.BookingStatusChangeApproved3(id);
         }
 
         public void TDelete(Booking t)
@@ -62,6 +72,11 @@ namespace HotelProject.BusinessLayer.Concerte
         public void TUpdate(Booking t)
         {
             _bookingDal.Update(t);
+        }
+
+        public void TBookingStatusChangeWait(int id)
+        {
+            _bookingDal.BookingStatusChangeWait(id);
         }
     }
 }

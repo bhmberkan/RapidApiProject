@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Net.Http;
 using HotelProject.WebUI.Dtos.DashboardDto;
 using Newtonsoft.Json;
+using System.Net;
 
 namespace HotelProject.WebUI.ViewComponents.Dashboard
 {
@@ -28,7 +29,6 @@ namespace HotelProject.WebUI.ViewComponents.Dashboard
         },
             };
 
-            var client2 = new HttpClient();
             var request2 = new HttpRequestMessage
             {
                 Method = HttpMethod.Get,
@@ -44,7 +44,7 @@ namespace HotelProject.WebUI.ViewComponents.Dashboard
 
 
 
-            var client3 = new HttpClient();
+
             var request3 = new HttpRequestMessage
             {
                 Method = HttpMethod.Get,
@@ -55,7 +55,7 @@ namespace HotelProject.WebUI.ViewComponents.Dashboard
         { "x-rapidapi-host", "fresh-linkedin-profile-data.p.rapidapi.com" },
     },
             };
-            
+
 
 
 
@@ -65,8 +65,8 @@ namespace HotelProject.WebUI.ViewComponents.Dashboard
             var responseTasks = new[]
             {
         client.SendAsync(request),
-        client2.SendAsync(request2),
-        client3.SendAsync(request3)
+        client.SendAsync(request2),
+        client.SendAsync(request3)
     };
 
             await Task.WhenAll(responseTasks);
@@ -74,6 +74,14 @@ namespace HotelProject.WebUI.ViewComponents.Dashboard
             var instagramResponse = responseTasks[0].Result;
             var twitterResponse = responseTasks[1].Result;
             var LinkedinResponse = responseTasks[2].Result;
+
+            if (instagramResponse.StatusCode == HttpStatusCode.TooManyRequests ||
+                twitterResponse.StatusCode == HttpStatusCode.TooManyRequests ||
+                LinkedinResponse.StatusCode == HttpStatusCode.TooManyRequests)
+            {
+                await Task.Delay(1000);
+                return View();
+            }
 
 
             instagramResponse.EnsureSuccessStatusCode();
@@ -99,9 +107,8 @@ namespace HotelProject.WebUI.ViewComponents.Dashboard
             ViewBag.city = resultLinkedinDataDto.data.city;
             ViewBag.country = resultLinkedinDataDto.data.country;
 
-            return View(new { InstagramData = resulInstagramFallowersDto, TwitterData = resultTwitterFallowersDto, LinkedinData= resultLinkedinDataDto });
+            return View(new { InstagramData = resulInstagramFallowersDto, TwitterData = resultTwitterFallowersDto, LinkedinData = resultLinkedinDataDto });
 
-           
 
 
         }

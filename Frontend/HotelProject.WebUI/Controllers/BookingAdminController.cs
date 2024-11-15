@@ -32,22 +32,87 @@ namespace HotelProject.WebUI.Controllers
             return View();
         }
 
-        public async Task<IActionResult> ApprovedRezervation(ApprovedBookingRezervationDto approvedBookingRezervationDto)
+
+
+
+        public async Task<IActionResult> ApprovedRezervation2(int id)
         {
-            approvedBookingRezervationDto.Status = "Onaylandı";
+            
             var client = _httpClientFactory.CreateClient();
-            var jsondata = JsonConvert.SerializeObject(approvedBookingRezervationDto);
-            StringContent stringContent = new StringContent(jsondata, Encoding.UTF8, "application/json");
-            var ResponseMessage = await client.PutAsync("http://localhost:26382/api/bbbb/", stringContent);
+           
+           
+            var ResponseMessage = await client.GetAsync($"http://localhost:26382/api/Booking/BookingAproved?id={id}");
             if (ResponseMessage.IsSuccessStatusCode)
             {
                 return RedirectToAction("Index");
             }
             return View();
-
-            // burdaki onaylama kısmına müfredatın en sonunda değineceğiz
-           
         }
+
+        public async Task<IActionResult> CancelRezervation(int id)
+        {
+
+            var client = _httpClientFactory.CreateClient();
+
+
+            var ResponseMessage = await client.GetAsync($"http://localhost:26382/api/Booking/BookingCancel?id={id}");
+            if (ResponseMessage.IsSuccessStatusCode)
+            {
+                return RedirectToAction("Index");
+            }
+            return View();
+        }
+
+        public async Task<IActionResult> WaitRezervation(int id)
+        {
+            var client = _httpClientFactory.CreateClient();
+            var ResponseMessage = await client.GetAsync($"http://localhost:26382/api/Booking/BookingWait?id={id}");
+            if (ResponseMessage.IsSuccessStatusCode)
+            {
+                return RedirectToAction("Index");
+            }
+            return View();
+        }
+
+
+        [HttpGet]
+        public async Task<IActionResult> UpdateBooking(int id)
+        {
+            var client = _httpClientFactory.CreateClient();
+            var ResponseMessage = await client.GetAsync($"http://localhost:26382/api/Booking/{id}");
+            if (ResponseMessage.IsSuccessStatusCode)
+            {
+                var jsondata = await ResponseMessage.Content.ReadAsStringAsync();
+                var values = JsonConvert.DeserializeObject<UpdateBookingDto>(jsondata);
+                return View(values);
+            }
+            return View();
+        }
+
+        [HttpPost]
+
+        public async Task<IActionResult> UpdateBooking(UpdateBookingDto updateBookingDto)
+        {
+          
+            
+                var client = _httpClientFactory.CreateClient();
+                var jsondata = JsonConvert.SerializeObject(updateBookingDto);
+                StringContent stringContent = new StringContent(jsondata, Encoding.UTF8, "application/json");
+                var ResponseMessage = await client.PutAsync("http://localhost:26382/api/Booking/UpdateBooking", stringContent);
+                if (ResponseMessage.IsSuccessStatusCode)
+                {
+                    return RedirectToAction("Index");
+                }
+                return View();
+            
+           
+
+
+        }
+
+
+
+       
 
     }
 }
