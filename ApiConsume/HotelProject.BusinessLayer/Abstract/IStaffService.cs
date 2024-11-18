@@ -11,5 +11,6 @@ namespace HotelProject.BusinessLayer.Abstract
     {
         int TGetStaffCount();
         List<Staff> TLast4Staff();
+        List<Staff> TFirst4staff();
     }
 }

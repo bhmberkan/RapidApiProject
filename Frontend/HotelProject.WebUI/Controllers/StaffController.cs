@@ -95,5 +95,19 @@ namespace HotelProject.WebUI.Controllers
             }
             return View();
         }
+
+        [HttpGet]
+        public async Task<IActionResult> StaffDetail(int id)
+        {
+            var client = _httpClientFactory.CreateClient();
+            var ResponseMessage = await client.GetAsync($"http://localhost:26382/api/Staff/{id}");
+            if (ResponseMessage.IsSuccessStatusCode)
+            {
+                var jsondata = await ResponseMessage.Content.ReadAsStringAsync();
+                var values = JsonConvert.DeserializeObject<UpdateStaffViewModel>(jsondata);
+                return View(values);
+            }
+            return View();
+        }
     }
 }

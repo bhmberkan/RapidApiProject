@@ -70,7 +70,7 @@ namespace HotelProject.DataAccessLayer.Entityframework
         public List<Booking> Last6Bookings()
         {
             var contex = new Context();
-            var values = contex.bookings.OrderByDescending(x => x.BookingID).Take(6).ToList(); // son6 kaydı donecek
+            var values = contex.bookings.OrderByDescending(x => x.BookingID).Take(5).ToList(); // son5 kaydı donecek
             return values;
         }
     }

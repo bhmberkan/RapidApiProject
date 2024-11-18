@@ -25,6 +25,11 @@ namespace HotelProject.BusinessLayer.Concerte
             _ıstaffDal.Delete(t);
         }
 
+        public List<Staff> TFirst4staff()
+        {
+          return  _ıstaffDal.First4staff();
+        }
+
         public Staff TGetByID(int id)
         {
             return _ıstaffDal.GetByID(id);

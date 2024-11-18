@@ -18,6 +18,13 @@ namespace HotelProject.DataAccessLayer.Entityframework
 
         }
 
+        public List<Staff> First4staff()
+        {
+            using var context = new Context();
+            var values = context.staffs.OrderBy(x => x.StaffID).Take(4).ToList();
+            return values;
+        }
+
         public int GetStaffCount()
         {
             using var context = new Context();

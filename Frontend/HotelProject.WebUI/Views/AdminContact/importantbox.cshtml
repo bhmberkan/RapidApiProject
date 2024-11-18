@@ -1,7 +1,6 @@
-﻿@model List<InboxContactDto>
-
+﻿@model List<importantMessageDto>
 @{
-    ViewData["Title"] = "Inbox";
+    ViewData["Title"] = "importantbox";
     Layout = "~/Views/AdminLayout/_AdminLayout.cshtml";
 }
 
@@ -29,7 +28,7 @@
                 </div>
                 <div class="email-list m-t-15">
                     @*@foreach (var x in Model.OrderByDescending(x=>x.ContactID))*@  @*eğer mesajları ters sırada getirmek istersek sadece bu yapıyı kullanmamız yeter*@
-                    @foreach (var x in Model)
+                    @foreach (var x in Model.ToList().Where(x=>x.situation=="Önemli"))
                     {
                         <div class="message">
                             <a href="/AdminContact/MessageDetailsByInbox/@x.ContactID">
@@ -69,3 +68,4 @@
         </div>
     </div>
 </div>
+

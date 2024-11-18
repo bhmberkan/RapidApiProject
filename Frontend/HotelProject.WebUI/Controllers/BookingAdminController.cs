@@ -104,14 +104,21 @@ namespace HotelProject.WebUI.Controllers
                     return RedirectToAction("Index");
                 }
                 return View();
-            
-           
-
-
         }
 
-
-
+        [HttpGet]
+        public async Task<IActionResult> BookingDetail(int id)
+        {
+            var client = _httpClientFactory.CreateClient();
+            var ResponseMessage = await client.GetAsync($"http://localhost:26382/api/Booking/{id}");
+            if (ResponseMessage.IsSuccessStatusCode)
+            {
+                var jsondata = await ResponseMessage.Content.ReadAsStringAsync();
+                var values = JsonConvert.DeserializeObject<UpdateBookingDto>(jsondata);
+                return View(values);
+            }
+            return View();
+        }
        
 
     }

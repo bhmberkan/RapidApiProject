@@ -21,11 +21,11 @@ namespace HotelProject.WebUI.ViewComponents.Default
         public async Task<IViewComponentResult> InvokeAsync()
         {
             var client = _httpClientFactory.CreateClient();
-            var responseMessage = await client.GetAsync("http://localhost:26382/api/Staff");
+            var responseMessage = await client.GetAsync("http://localhost:26382/api/Staff/First4Staff");
             if (responseMessage.IsSuccessStatusCode)
             {
                 var jsondata = await responseMessage.Content.ReadAsStringAsync();
-                var values = JsonConvert.DeserializeObject<List<ResultStaffDto>>(jsondata);
+                var values = JsonConvert.DeserializeObject<List<ResultFirst4StaffDto>>(jsondata);
                 return View(values);
             }
             return View();

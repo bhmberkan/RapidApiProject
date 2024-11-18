@@ -12,6 +12,7 @@ using System.Text;
 using System.Threading.Tasks;
 using MailKit.Net.Smtp;
 
+
 namespace HotelProject.WebUI.Controllers
 {
     public class AdminContactController : Controller
@@ -55,9 +56,26 @@ namespace HotelProject.WebUI.Controllers
 
 
             return View();
+        }
+
+        public async Task<IActionResult> importantbox()
+        {
+            var client = _httpClientFactory.CreateClient();
+            var responseMessage = await client.GetAsync("http://localhost:26382/api/Contact");
+
+            await Gelengidensay();
+
+            if (responseMessage.IsSuccessStatusCode)
+            {
+                var jsondata = await responseMessage.Content.ReadAsStringAsync();
+
+                var values = JsonConvert.DeserializeObject<List<importantMessageDto>>(jsondata);
+
+                return View(values);
+            }
 
 
-
+            return View();
         }
 
         public async Task<IActionResult> Sendbox()
