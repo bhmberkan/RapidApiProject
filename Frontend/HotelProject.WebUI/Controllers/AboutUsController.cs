@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 
 namespace HotelProject.WebUI.Controllers
 {
-    public class RoomController : Controller
+    public class AboutUsController : Controller
     {
         private readonly IHttpClientFactory _httpClientFactory;
 
-        public RoomController(IHttpClientFactory httpClientFactory)
+        public AboutUsController(IHttpClientFactory httpClientFactory)
         {
             _httpClientFactory = httpClientFactory;
         }

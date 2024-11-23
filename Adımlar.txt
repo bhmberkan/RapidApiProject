@@ -12,4 +12,4 @@ bir de personel ve odalardan sadece 3 tane falan listeleme bunlar kaldý eksik ol
 
 
 
-personellerden 3 tane listeleme olayýný tamamladým.
+personellerden 3 tane listeleme olayýný tamamladým. odalardan belirli bir kýsmýn listelenmesini tamamladým

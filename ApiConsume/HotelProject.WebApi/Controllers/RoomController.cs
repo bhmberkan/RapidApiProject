@@ -56,6 +56,11 @@ namespace HotelProject.WebApi.Controllers
             return Ok(values);
         }
 
-
+        [HttpGet("First3Rooms")]
+        public IActionResult First3Rooms()
+        {
+            var values = _roomService.TFirst3Room();
+            return Ok(values);
+        }
     }
 }

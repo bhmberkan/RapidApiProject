@@ -1,5 +1,4 @@
-﻿@model List<ResultRoomDto>
-
+﻿@model List<HotelProject.WebUI.Dtos.RoomDto.ResultFirst3RoomDto>
 <div class="container-xxl py-5">
     <div class="container">
         <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
@@ -7,7 +6,8 @@
             <h1 class="mb-5">Odalarımızı  <span class="text-primary text-uppercase">Keşfedin</span></h1>
         </div>
         <div class="row g-4">
-            @foreach (var x in Model)
+
+@foreach (var x in Model)
             {
             <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
                 <div class="room-item shadow rounded overflow-hidden">
@@ -38,8 +38,8 @@
                         </div>
                     </div>
                 </div>
-            </div>
-            }
-        </div>
-    </div>
+                </div>
+}
+</div>
+</div>
 </div>

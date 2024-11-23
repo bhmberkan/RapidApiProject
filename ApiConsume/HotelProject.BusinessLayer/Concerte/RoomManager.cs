@@ -23,6 +23,11 @@ namespace HotelProject.BusinessLayer.Concerte
             _roomDal.Delete(t);
         }
 
+        public List<Room> TFirst3Room()
+        {
+            return _roomDal.First3Room();
+        }
+
         public Room TGetByID(int id)
         {
             return _roomDal.GetByID(id);

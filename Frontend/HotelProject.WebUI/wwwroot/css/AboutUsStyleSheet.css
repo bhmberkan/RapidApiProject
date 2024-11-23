@@ -1,0 +1,36 @@
+﻿.about-us-section img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 8px 15px 20px rgba(0, 0, 0, 0.2); /* Daha belirgin bir gölge */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Hover için animasyon */
+}
+
+.about-us-section img:hover {
+    transform: scale(1.05); /* Hover sırasında resmi büyütme efekti */
+    box-shadow: 0 12px 20px rgba(0, 0, 0, 0.3); /* Hover sırasında daha yoğun gölge */
+}
+    .about-us-section h2 {
+        color: #333;
+        font-weight: 700;
+        margin-bottom: 20px;
+    }
+
+    .about-us-section p {
+        color: #555;
+        line-height: 1.6;
+        text-align: justify;
+        margin-bottom: 16px;
+    }
+
+    .about-us-section img {
+        max-width: 100%;
+        height: auto;
+        border-radius: 8px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+.container {
+    max-width: 1100px;
+    margin: 0 auto;
+}
