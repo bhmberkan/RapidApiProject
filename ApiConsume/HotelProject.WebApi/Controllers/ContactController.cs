@@ -50,6 +50,18 @@ namespace HotelProject.WebApi.Controllers
             return Ok(_contactService.TGetContactCount());  
         }
 
+        [HttpGet("importantContact")]
+        public IActionResult İmportantContact(int id)
+        {
+            _contactService.Tİmportantmessage(id);
+            return Ok();
+        }
+
+        [HttpGet("İmportantMessageCount")]
+        public IActionResult İmportantMessageCount()
+        {
+            return Ok(_contactService.TİmportantMessageCount());
+        }
 
     }
 }

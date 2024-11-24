@@ -23,5 +23,19 @@ namespace HotelProject.DataAccessLayer.Entityframework
             return context.contacts.Count();
              
         }
+
+        public void İmportantmessage(int id)
+        {
+            var context = new Context();
+            var values = context.contacts.Find(id);
+            values.situation = "Önemli";
+            context.SaveChanges();
+        }
+
+        public int İmportantMessageCount()
+        {
+            var context = new Context();
+            return context.contacts.Where(x => x.situation == "Önemli").Count();
+        }
     }
 }

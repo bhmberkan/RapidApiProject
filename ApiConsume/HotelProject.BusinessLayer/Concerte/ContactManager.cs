@@ -38,6 +38,11 @@ namespace HotelProject.BusinessLayer.Concerte
             return _contactDal.GetList();
         }
 
+        public void Tİmportantmessage(int id)
+        {
+            _contactDal.İmportantmessage(id);
+        }
+
         public void TInsert(Contact t)
         {
             _contactDal.Insert(t);
@@ -46,6 +51,11 @@ namespace HotelProject.BusinessLayer.Concerte
         public void TUpdate(Contact t)
         {
             _contactDal.Update(t);
+        }
+
+        public int TİmportantMessageCount()
+        {
+            return _contactDal.İmportantMessageCount();
         }
     }
 }

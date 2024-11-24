@@ -11,5 +11,8 @@ namespace HotelProject.BusinessLayer.Abstract
     {
 
         public int TGetContactCount();
+
+        void Tİmportantmessage(int id);
+        public int TİmportantMessageCount();
     }
 }

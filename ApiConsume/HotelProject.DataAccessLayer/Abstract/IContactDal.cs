@@ -11,5 +11,9 @@ namespace HotelProject.DataAccessLayer.Abstract
     {
         public int GetContactCount(); // geriye değer döndürmesi için int formatıdna tanımladık voidden 
 
+        void İmportantmessage(int id);
+
+        public int İmportantMessageCount();
+
     }
 }

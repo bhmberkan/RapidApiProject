@@ -30,12 +30,22 @@ namespace HotelProject.WebUI.Controllers
             var client2 = _httpClientFactory.CreateClient();
             var responseMessage2 = await client2.GetAsync("http://localhost:26382/api/Contact/GetContactCount");
 
+            
             var client3 = _httpClientFactory.CreateClient();
             var responseMessage3 = await client3.GetAsync("http://localhost:26382/api/SendMessage/GetSendMessageCount");
+
+            var client4 = _httpClientFactory.CreateClient();
+            var responseMessage4 = await client4.GetAsync("http://localhost:26382/api/Contact/İmportantMessageCount");
+
+
             var jsondata2 = await responseMessage2.Content.ReadAsStringAsync();
             var jsondata3 = await responseMessage3.Content.ReadAsStringAsync();
+            var jsondata4 = await responseMessage4.Content.ReadAsStringAsync();
+
+
             ViewBag.ContactCount = jsondata2;
             ViewBag.SendMessageCount = jsondata3;
+            ViewBag.İmportantMessageCount = jsondata4;
         }
 
         public async Task<IActionResult> Inbox()
@@ -197,6 +207,23 @@ namespace HotelProject.WebUI.Controllers
                 return View(values);
             }
             return View();
+
+        }
+
+
+        public async Task<IActionResult> İmportantContact(int id)
+        {
+            var client = _httpClientFactory.CreateClient();
+
+
+            var ResponseMessage = await client.GetAsync($"http://localhost:26382/api/Contact/importantContact?id={id}");
+            if (ResponseMessage.IsSuccessStatusCode)
+            {
+                return RedirectToAction("MessageDetailsByInbox", "AdminContact", new { id = id });
+            }
+            return View();
+
+
 
         }
 
