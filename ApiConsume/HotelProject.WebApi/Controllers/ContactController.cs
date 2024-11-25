@@ -47,7 +47,7 @@ namespace HotelProject.WebApi.Controllers
 
         public IActionResult GetContactCount()
         {
-            return Ok(_contactService.TGetContactCount());  
+            return Ok(_contactService.TGetContactCount());
         }
 
         [HttpGet("importantContact")]
@@ -57,10 +57,47 @@ namespace HotelProject.WebApi.Controllers
             return Ok();
         }
 
+        [HttpGet("Unimportant")]
+        public IActionResult Unimportant(int id)
+        {
+            _contactService.TUnimportant(id);
+            return Ok();
+        }
+
+
+
         [HttpGet("İmportantMessageCount")]
         public IActionResult İmportantMessageCount()
         {
             return Ok(_contactService.TİmportantMessageCount());
+        }
+
+        [HttpGet("BinMessageCount")]
+        public IActionResult BinMessageCount()
+        {
+            return Ok(_contactService.TBinMessageCount());
+        }
+
+        [HttpGet("BinMessageContact")]
+        public IActionResult BinMessageContact(int id)
+        {
+            _contactService.TBinMessageContact(id);
+            return Ok();
+        }
+
+        [HttpGet("UnBinMessage")]
+        public IActionResult UnBinMessage(int id)
+        {
+            _contactService.TUnBinMessage(id);
+            return Ok();
+        }
+
+        [HttpDelete("{id}")]
+        public IActionResult DeleteContact(int id)
+        {
+            var values = _contactService.TGetByID(id);
+            _contactService.TDelete(values);
+            return Ok();
         }
 
     }

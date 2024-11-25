@@ -14,5 +14,14 @@ namespace HotelProject.BusinessLayer.Abstract
 
         void Tİmportantmessage(int id);
         public int TİmportantMessageCount();
+
+        void TUnimportant(int id);
+
+        public int TBinMessageCount();
+
+        void TBinMessageContact(int id);
+
+        void TUnBinMessage(int id);
+
     }
 }

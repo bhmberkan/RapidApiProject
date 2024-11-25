@@ -57,5 +57,25 @@ namespace HotelProject.BusinessLayer.Concerte
         {
             return _contactDal.İmportantMessageCount();
         }
+
+        public void TUnimportant(int id)
+        {
+             _contactDal.Unimportant(id);
+        }
+
+        public int TBinMessageCount()
+        {
+            return _contactDal.BinMessageCount();
+        }
+
+        public void TBinMessageContact(int id)
+        {
+            _contactDal.BinMessageContact(id);
+        }
+
+        public void TUnBinMessage(int id)
+        {
+            _contactDal.UnBinMessage(id);
+        }
     }
 }

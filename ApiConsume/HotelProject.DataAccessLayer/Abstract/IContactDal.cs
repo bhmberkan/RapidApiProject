@@ -15,5 +15,13 @@ namespace HotelProject.DataAccessLayer.Abstract
 
         public int İmportantMessageCount();
 
+        void Unimportant(int id);
+
+        public int BinMessageCount();
+
+        void BinMessageContact(int id);
+
+        void UnBinMessage(int id);
+
     }
 }

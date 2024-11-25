@@ -30,22 +30,28 @@ namespace HotelProject.WebUI.Controllers
             var client2 = _httpClientFactory.CreateClient();
             var responseMessage2 = await client2.GetAsync("http://localhost:26382/api/Contact/GetContactCount");
 
-            
+
             var client3 = _httpClientFactory.CreateClient();
             var responseMessage3 = await client3.GetAsync("http://localhost:26382/api/SendMessage/GetSendMessageCount");
 
             var client4 = _httpClientFactory.CreateClient();
             var responseMessage4 = await client4.GetAsync("http://localhost:26382/api/Contact/İmportantMessageCount");
 
+            var client5 = _httpClientFactory.CreateClient();
+            var responseMessage5 = await client5.GetAsync("http://localhost:26382/api/Contact/BinMessageCount");
+
 
             var jsondata2 = await responseMessage2.Content.ReadAsStringAsync();
             var jsondata3 = await responseMessage3.Content.ReadAsStringAsync();
             var jsondata4 = await responseMessage4.Content.ReadAsStringAsync();
+            var jsondata5 = await responseMessage5.Content.ReadAsStringAsync();
+
 
 
             ViewBag.ContactCount = jsondata2;
             ViewBag.SendMessageCount = jsondata3;
             ViewBag.İmportantMessageCount = jsondata4;
+            ViewBag.BinMessageCount = jsondata5;
         }
 
         public async Task<IActionResult> Inbox()
@@ -87,6 +93,29 @@ namespace HotelProject.WebUI.Controllers
 
             return View();
         }
+
+        public async Task<IActionResult> DeleteBox()
+        {
+            var client = _httpClientFactory.CreateClient();
+            var responseMessage = await client.GetAsync("http://localhost:26382/api/Contact");
+
+            await Gelengidensay();
+
+            if (responseMessage.IsSuccessStatusCode)
+            {
+                var jsondata = await responseMessage.Content.ReadAsStringAsync();
+
+                var values = JsonConvert.DeserializeObject<List<BinMessageDto>>(jsondata);
+
+                return View(values);
+            }
+
+
+            return View();
+        }
+
+
+
 
         public async Task<IActionResult> Sendbox()
         {
@@ -227,6 +256,52 @@ namespace HotelProject.WebUI.Controllers
 
         }
 
+        public async Task<IActionResult> UnimportantContact(int id)
+        {
+            var client = _httpClientFactory.CreateClient();
+            var ResponseMessage = await client.GetAsync($"http://localhost:26382/api/Contact/Unimportant?id={id}");
+            if (ResponseMessage.IsSuccessStatusCode)
+            {
+                return RedirectToAction("importantbox", "AdminContact", new { id = id });
+            }
+            return View();
+        }
+
+        public async Task<IActionResult> BinMessageContact(int id)
+        {
+            var client = _httpClientFactory.CreateClient();
+            var ResponseMessage = await client.GetAsync($"http://localhost:26382/api/Contact/BinMessageContact?id={id}");
+            if (ResponseMessage.IsSuccessStatusCode)
+            {
+                return RedirectToAction("MessageDetailsByInbox", "AdminContact", new { id = id });
+            }
+            return View();
+        }
+
+        public async Task<IActionResult> UnBinMessageContact(int id)
+        {
+            var client = _httpClientFactory.CreateClient();
+            var ResponseMessage = await client.GetAsync($"http://localhost:26382/api/Contact/UnBinMessage?id={id}");
+            if (ResponseMessage.IsSuccessStatusCode)
+            {
+                return RedirectToAction("DeleteBox", "AdminContact", new { id = id });
+            }
+
+            return View();
+        }
+
+        public async Task<IActionResult> DeleteMessage(int id)
+        {
+            var client = _httpClientFactory.CreateClient();
+            var ResponseMessage = await client.DeleteAsync($"http://localhost:26382/api/Contact/{id}");
+            if (ResponseMessage.IsSuccessStatusCode)
+            {
+                return RedirectToAction("Inbox","AdminContact"); 
+
+            }
+
+            return View();
+        }
 
 
     }
