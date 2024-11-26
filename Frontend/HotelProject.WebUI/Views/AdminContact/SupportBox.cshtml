@@ -1,9 +1,8 @@
-﻿@model List<importantMessageDto>
+﻿@model List<MessageKategoryBoxDto>
 @{
-    ViewData["Title"] = "importantbox";
+    ViewData["Title"] = "SupportBox";
     Layout = "~/Views/AdminLayout/_AdminLayout.cshtml";
 }
-
 
 
 <div class="col-lg-12">
@@ -19,16 +18,14 @@
                 <div role="toolbar" class="toolbar">
                     <div class="btn-group">
                         <button aria-expanded="false" data-toggle="dropdown" class="btn btn-dark dropdown-toggle" type="button">
-                            Önemli Mesajlar <span class="caret m-l-5"></span>
+                            Destek Mesajları <span class="caret m-l-5"></span>
                         </button>
-                        @*<div class="dropdown-menu">
-                                <span class="dropdown-header">Gelen Mesajlar </span>
-                            </div>*@
+
                     </div>
                 </div>
                 <div class="email-list m-t-15">
-                    @*@foreach (var x in Model.OrderByDescending(x=>x.ContactID))*@  @*eğer mesajları ters sırada getirmek istersek sadece bu yapıyı kullanmamız yeter*@
-                    @foreach (var x in Model.ToList().Where(x=>x.situation=="Önemli" && x.Bin!= "Çöp"))
+                    @*şikayet için messagecategory ıd = 2 olmalı*@
+                    @foreach (var x in Model.ToList().Where(x => x.MessageCategoryID == 3 && x.Bin != "Çöp"))
                     {
                         <div class="message">
                             <a href="/AdminContact/MessageDetailsByInbox/@x.ContactID">
@@ -39,7 +36,7 @@
                                     </div><span class="star-toggle ti-star"></span>
                                 </div>
                                 <div class="col-mail col-mail-2">
-                                    <!--<div class="subject"> x.Message.Substring(0, 10)...</div>-->  @*mesajın ilk 10  karakterini al*@
+
                                     <div class="subject"><b style="color: #1c7307">Gönderen:</b> @x.Name <b style="color: #942a14;">Başlık:</b> <span>@x.Message</span> </div>
                                     <div class="date">@(((DateTime)x.Date).ToString("dd-MMM-yyyy"))</div>
                                 </div>
@@ -48,22 +45,7 @@
                     }
 
                 </div>
-                <!-- panel sayfalama kısmı -->
-                @*<div class="row">
-                        <div class="col-7">
-                            <div class="text-left">1 - 20 of 568</div>
-                        </div>
-                        <div class="col-5">
-                            <div class="btn-group float-right">
-                                <button class="btn btn-gradient" type="button">
-                                    <i class="fa fa-angle-left"></i>
-                                </button>
-                                <button class="btn btn-dark" type="button">
-                                    <i class="fa fa-angle-right"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </div>*@
+
             </div>
         </div>
     </div>

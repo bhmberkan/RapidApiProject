@@ -114,6 +114,89 @@ namespace HotelProject.WebUI.Controllers
             return View();
         }
 
+        public async Task<IActionResult> ComplaintBox()
+        {
+            var client = _httpClientFactory.CreateClient();
+            var responseMessage = await client.GetAsync("http://localhost:26382/api/Contact");
+            await Gelengidensay();
+            if (responseMessage.IsSuccessStatusCode)
+            {
+                var jsondata = await responseMessage.Content.ReadAsStringAsync();
+
+                var values = JsonConvert.DeserializeObject<List<MessageKategoryBoxDto>>(jsondata);
+
+                return View(values);
+            }
+
+            return View();
+        }
+
+        public async Task<IActionResult> ThankuBox()
+        {
+            var client = _httpClientFactory.CreateClient();
+            var responseMessage = await client.GetAsync("http://localhost:26382/api/Contact");
+            await Gelengidensay();
+            if (responseMessage.IsSuccessStatusCode)
+            {
+                var jsondata = await responseMessage.Content.ReadAsStringAsync();
+
+                var values = JsonConvert.DeserializeObject<List<MessageKategoryBoxDto>>(jsondata);
+
+                return View(values);
+            }
+
+
+            return View();
+        }
+
+        public async Task<IActionResult> SupportBox()
+        {
+            var client = _httpClientFactory.CreateClient();
+            var responseMessage = await client.GetAsync("http://localhost:26382/api/Contact");
+            await Gelengidensay();
+            if (responseMessage.IsSuccessStatusCode)
+            {
+                var jsondata = await responseMessage.Content.ReadAsStringAsync();
+
+                var values = JsonConvert.DeserializeObject<List<MessageKategoryBoxDto>>(jsondata);
+
+                return View(values);
+            }
+            return View();
+        }
+
+        public async Task<IActionResult> JopApplicationBox()
+        {
+            var client = _httpClientFactory.CreateClient();
+            var responseMessage = await client.GetAsync("http://localhost:26382/api/Contact");
+            await Gelengidensay();
+            if (responseMessage.IsSuccessStatusCode)
+            {
+                var jsondata = await responseMessage.Content.ReadAsStringAsync();
+
+                var values = JsonConvert.DeserializeObject<List<MessageKategoryBoxDto>>(jsondata);
+
+                return View(values);
+            }
+            return View();
+        }
+
+        public async Task<IActionResult> OtherMessageBox()
+        {
+            var client = _httpClientFactory.CreateClient();
+            var responseMessage = await client.GetAsync("http://localhost:26382/api/Contact");
+            await Gelengidensay();
+            if (responseMessage.IsSuccessStatusCode)
+            {
+                var jsondata = await responseMessage.Content.ReadAsStringAsync();
+
+                var values = JsonConvert.DeserializeObject<List<MessageKategoryBoxDto>>(jsondata);
+
+                return View(values);
+            }
+
+            return View();
+        }
 
 
 
