@@ -23,5 +23,7 @@ namespace HotelProject.DataAccessLayer.Abstract
 
         void UnBinMessage(int id);
 
+        List<Contact> First3Message();
+
     }
 }

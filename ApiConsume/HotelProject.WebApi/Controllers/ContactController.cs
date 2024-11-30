@@ -100,5 +100,12 @@ namespace HotelProject.WebApi.Controllers
             return Ok();
         }
 
+        [HttpGet("First3Message")]
+        public IActionResult First3Message()
+        {
+            var values = _contactService.TFirst3Message();
+            return Ok(values);
+        }
+
     }
 }

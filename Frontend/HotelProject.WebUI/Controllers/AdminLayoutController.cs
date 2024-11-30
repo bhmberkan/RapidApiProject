@@ -41,27 +41,23 @@ namespace HotelProject.WebUI.Controllers
 
             return Task.FromResult(PartialView());
         }
-        public async Task<PartialViewResult> HeaderPartial()
+        public PartialViewResult HeaderPartial()
         {
-            var client = _httpClientFactory.CreateClient();
-            var responseMessage = await client.GetAsync("http://localhost:26382/api/Contact/GetContactCount");
-            var jsondata = await responseMessage.Content.ReadAsStringAsync();
-
-            ViewBag.ContactCount = jsondata;
+           
 
 
-
-            /*  var responseMessage2 = await client.GetAsync("http://localhost:26382/api/Contact");
-              var jsondata2 = await responseMessage2.Content.ReadAsStringAsync();
-
-
-              var values = JsonConvert.DeserializeObject<List<InboxContactDto>>(jsondata2);
-
-
-
-
-              return PartialView(values);*/
             return PartialView();
+
+          /*  var client2 = _httpClientFactory.CreateClient();
+            var responseMessage2 = await client.GetAsync("http://localhost:26382/api/Room/First3Rooms");
+            if (responseMessage.IsSuccessStatusCode)
+            {
+                var jsondata2 = await responseMessage.Content.ReadAsStringAsync();
+                var values = JsonConvert.DeserializeObject<List<ResultFirs3MessageDto>>(jsondata);
+                return PartialView(values);
+            }
+            return PartialView(new List<ResultFirs3MessageDto>());*/
+
             
         }
 

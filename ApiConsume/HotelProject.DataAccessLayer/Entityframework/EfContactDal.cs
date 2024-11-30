@@ -33,6 +33,14 @@ namespace HotelProject.DataAccessLayer.Entityframework
             return context.contacts.Where(x => x.Bin == "Çöp").Count();
         }
 
+        public List<Contact> First3Message()
+        {
+            var context = new Context();
+            var values = context.contacts.OrderBy(x => x.ContactID).Take(3).ToList();
+            return values;
+            
+        }
+
         public int GetContactCount()
         { // entitye özgü metod kullanıyoruz
             var context = new Context();

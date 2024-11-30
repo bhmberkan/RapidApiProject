@@ -77,5 +77,10 @@ namespace HotelProject.BusinessLayer.Concerte
         {
             _contactDal.UnBinMessage(id);
         }
+
+        public List<Contact> TFirst3Message()
+        {
+            return _contactDal.First3Message();
+        }
     }
 }

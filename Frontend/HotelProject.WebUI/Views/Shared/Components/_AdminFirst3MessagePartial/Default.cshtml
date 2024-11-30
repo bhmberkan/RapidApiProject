@@ -1,5 +1,11 @@
-﻿
- @*burası iptal onun yerine viewcomponent olarak kullandım dto çakışmasını engellemek için*@
+﻿@model List<HotelProject.WebUI.Dtos.ContactDto.ResultFirs3MessageDto>
+@{
+    Layout = null;
+}
+
+
+
+
 <div class="header">
     <div class="header-content clearfix">
 
@@ -35,22 +41,25 @@
                         </div>
                         <div class="dropdown-content-body">
 
-                        
+                            @foreach (var x in Model)
+                            {
                                 <ul>
                                     <li class="notification-unread">
                                         <a href="javascript:void()">
                                             <img class="float-left mr-3 avatar-img" src="~/adminweb/images/messageicon.png" alt="">
                                             <div class="notification-content">
-                                                <div class="notification-heading">AD</div>
-                                                <div class="notification-timestamp">Mail</div>
-                                                <div class="notification-text">içerik </div>
+                                                <div class="notification-heading">@x.Name</div>
+                                                <div class="notification-timestamp">@x.Mail</div>
+                                                <div class="notification-text">@x.Subject </div>
                                             </div>
                                         </a>
                                     </li>
 
                                 </ul>
 
-                            
+                            }
+
+
 
 
 
@@ -59,7 +68,7 @@
                         </div>
                     </div>
                 </li>
-              
+
                 <li class="icons dropdown d-none d-md-flex">
                     <a href="javascript:void(0)" class="log-user" data-toggle="dropdown">
                         <span>English</span>  <i class="fa fa-angle-down f-s-14" aria-hidden="true"></i>
@@ -88,7 +97,7 @@
                                     <a href="/AdminContact/Inbox/"><i class="icon-envelope-open"></i> <span>Gelen Kutusu</span> <div class="badge gradient-3 badge-pill badge-primary">3</div></a>
                                 </li>
 
-                              
+
                                 <li>
                                     <a href="/Default/Index/"><i class="icon-lock"></i> <span>Ana Sayfa</span></a>
                                 </li>

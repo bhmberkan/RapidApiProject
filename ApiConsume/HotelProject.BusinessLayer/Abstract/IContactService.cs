@@ -23,5 +23,7 @@ namespace HotelProject.BusinessLayer.Abstract
 
         void TUnBinMessage(int id);
 
+        List<Contact> TFirst3Message();
+
     }
 }
