@@ -41,7 +41,7 @@ namespace HotelProject.WebUI.Controllers
 
         [HttpPost]
 
-        public async Task<IActionResult> AddTestimonial(TestimonialViewModel model)
+        public async Task<IActionResult> AddTestimonial(AddTestimonialViewModel model)
         {
             var client = _httpClientFactory.CreateClient();
             var jstondata = JsonConvert.SerializeObject(model);
@@ -76,15 +76,18 @@ namespace HotelProject.WebUI.Controllers
             if (ResponseMessage.IsSuccessStatusCode)
             {
                 var jsondata = await ResponseMessage.Content.ReadAsStringAsync();
-                var values = JsonConvert.DeserializeObject<TestimonialViewModel>(jsondata);
+                var values = JsonConvert.DeserializeObject<UpdateTestimonialViewModel>(jsondata);
                 return View(values);
             }
             return View();
+
+
+
         }
 
         [HttpPost]
 
-        public async Task<IActionResult> UpdateTestimonial(TestimonialViewModel model)
+        public async Task<IActionResult> UpdateTestimonial(UpdateTestimonialViewModel model)
         {
             var client = _httpClientFactory.CreateClient();
             var jsondata = JsonConvert.SerializeObject(model);
@@ -95,6 +98,8 @@ namespace HotelProject.WebUI.Controllers
                 return RedirectToAction("Index");
             }
             return View();
-        }
+
+
+        } /* burada bir şey var gözümden kaçıyor güncelleme yaptığımda ekleme işlemi yapıyor ancak yapmaması lazım. */ 
     }
 }

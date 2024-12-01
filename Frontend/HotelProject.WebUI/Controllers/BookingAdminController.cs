@@ -119,6 +119,21 @@ namespace HotelProject.WebUI.Controllers
             }
             return View();
         }
+
+
+        public async Task<IActionResult> DeleteBooking(int id)
+        {
+            var client = _httpClientFactory.CreateClient();
+            var ResponseMessage = await client.DeleteAsync($"http://localhost:26382/api/Booking/{id}");
+            if (ResponseMessage.IsSuccessStatusCode)
+            {
+                return RedirectToAction("Index");
+
+            }
+
+
+            return View();
+        }
        
 
     }
